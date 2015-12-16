@@ -28,6 +28,10 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Hello World</title>
+		
+	
+		
+		
     </head>
     <body>
         <div class="app">
@@ -35,12 +39,28 @@
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
+				
             </div>
         </div>
+		<input type="button" value="click to save me" onclick="storeIntelligrapeLogo()" />
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+				function storeIntelligrapeLogo(){
+  var url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjKxxlYx8e9ZiLAKKuyBDUKHQAFTTuByFMDpKyuw38whNs7CwxMg";  //image url
+  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+      var imagePath = fs.root.fullPath + "/logo.png"; // full file path
+      var fileTransfer = new FileTransfer();
+      fileTransfer.download(url, imagePath, function (entry) {
+               console.log(entry.fullPath); // entry is fileEntry object
+			   alert("done");
+      }, function (error) {
+               console.log("Some error");
+			   alert("failed")
+      });
+   })
+}
         </script>
     </body>
 </html>
